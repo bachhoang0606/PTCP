@@ -1,0 +1,28 @@
+VAR matrix : ARRAY(.5.) OF ARRAY (.5.) OF integer;
+    n : INTEGER;
+    mark: INTEGER;
+  
+BEGIN
+  mark := 1;
+  
+  call Print('n');
+  call ReadI(n);
+
+  FOR i := 1 TO n DO
+    FOR j := 1 TO n-i DO
+    BEGIN
+      call ReadI(matrix(.i.)(.j.));
+    END;
+
+  FOR i := 1 TO n DO
+    FOR j := 1 TO n-i DO
+      BEGIN
+        IF matrix(.i.)(.j.) != 0 THEN
+          mark := 0;
+      END;
+  
+  IF mark = 1 THEN CALL PRINT(1)
+  ELSE CALL PRINT(0);
+
+END
+.
