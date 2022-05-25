@@ -57,6 +57,10 @@ void compileIndexes(void);
 void compileFunctionApplication(void);
 void compileVariable(void);
 
+void compileFuncDecls(void);
+void compileProcDecls(void);
+void compileBlock6(void);
+
 int compile(char *fileName);
 
 #endif

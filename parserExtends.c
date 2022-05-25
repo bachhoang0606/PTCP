@@ -8,7 +8,7 @@
 
 #include "reader.h"
 #include "scanner.h"
-#include "parser.h"
+#include "parserExtends.h"
 #include "error.h"
 
 Token *currentToken;
@@ -70,16 +70,34 @@ void compileBlock3(void) {
   else compileBlock4();
 }
 
+void compileFuncDecls(void){
+
+    while (lookAhead->tokenType == KW_FUNCTION) 
+        compileFuncDecl(); 
+}
+
 void compileBlock4(void) {
                     
-  compileSubDecls();
+  compileFuncDecls();
   compileBlock5();
 }
 
-void compileBlock5(void) {
+void compileProcDecls(void){
+
+    while (lookAhead->tokenType == KW_PROCEDURE) 
+        compileProcDecl(); 
+}
+
+void compileBlock6(void) {
   eat(KW_BEGIN);
   compileStatements();
   eat(KW_END);
+}
+
+void compileBlock5(void){
+
+    compileProcDecls();
+    compileBlock6();
 }
 
 void compileConstDecls(void) {
@@ -122,16 +140,16 @@ void compileVarDecl(void) {
   eat(SB_SEMICOLON);
 }
 
-void compileSubDecls(void) {
-  assert("Parsing subtoutines ....");
-  // TODO
-  switch(lookAhead->tokenType) {
-  case KW_FUNCTION: compileFuncDecl(); compileSubDecls(); break;
-  case KW_PROCEDURE: compileProcDecl(); compileSubDecls(); break;
-  case KW_BEGIN: break;
-  }
-  assert("Subtoutines parsed ....");
-}
+// void compileSubDecls(void) {
+//   assert("Parsing subtoutines ....");
+//   // TODO
+//   switch(lookAhead->tokenType) {
+//   case KW_FUNCTION: compileFuncDecl(); compileSubDecls(); break;
+//   case KW_PROCEDURE: compileProcDecl(); compileSubDecls(); break;
+//   case KW_BEGIN: break;
+//   }
+//   assert("Subtoutines parsed ....");
+// }
 
 void compileFuncDecl(void) {
   assert("Parsing a function ....");

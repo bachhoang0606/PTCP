@@ -8,8 +8,8 @@
 #include <stdlib.h>
 
 #include "reader.h"
-#include "parser.h"
-
+//#include "parser.h"
+#include "parserExtends.h"
 /******************************************************************/
 
 int main(int argc, char *argv[]) {
